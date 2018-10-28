@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>PropertyTracker.Application.DTO</AssemblyName>
+    <RootNamespace>PropertyTracker.Application.DTO</RootNamespace>
+  </PropertyGroup>
+
+</Project>
