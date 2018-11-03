@@ -22,15 +22,16 @@ namespace PropertyTracker.Application.Services.Services
             return this.repository.Create(group.ConvertToModel());
         }
 
-        public Task Delete(Group group)
+        public Task Delete(Guid id)
         {
-            throw new NotImplementedException();
-            //return this.repository.Get(group.ConvertToModel());
+            return this.repository.Delete(id);
         }
 
-        public Task<Group> Get(Guid id)
+        public async Task<Group> Get(Guid id)
         {
-            return this.Get(id);
+            var group = await this.repository.Get(id);
+
+            return group?.ConvertToDTO();
         }
 
         public async Task<List<Group>> GetAll(Guid userId)
@@ -42,7 +43,7 @@ namespace PropertyTracker.Application.Services.Services
 
         public Task Update(Group group)
         {
-            throw new NotImplementedException();
+            return this.repository.Update(group.ConvertToModel());
         }
     }
 }

@@ -15,6 +15,6 @@ namespace PropertyTracker.Application.Services.Interfaces
 
         Task Update(Group group);
 
-        Task Delete(Group group);
+        Task Delete(Guid id);
     }
 }

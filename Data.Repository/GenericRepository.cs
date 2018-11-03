@@ -26,5 +26,15 @@ namespace PropertyTracker.Data.Repository
         {
             return this.AddOneAsync<T>(item);
         }
+
+        public Task Delete(Guid id)
+        {
+            return this.DeleteOneAsync<T>(x => x.Id.Equals(id));
+        }
+
+        public Task Update(T item)
+        {
+            return this.UpdateOneAsync<T>(item);
+        }
     }
 }

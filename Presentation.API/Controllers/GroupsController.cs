@@ -12,18 +12,20 @@ namespace PropertyTracker.Presentation.API.Controllers
     [ApiController]
     public class GroupsController : ControllerBase
     {
-        private IGroupService service { get; }
+        private IGroupService groupService { get; }
+        private ISiteService siteService { get; }
 
-        public GroupsController(IGroupService service)
+        public GroupsController(IGroupService groupService, ISiteService siteService)
         {
-            this.service = service;
+            this.groupService = groupService;
+            this.siteService = siteService;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Group>))]
         public async Task<IActionResult> GetAll([Required] Guid userId)
         {
-            return Ok(await this.service.GetAll(userId));
+            return Ok(await this.groupService.GetAll(userId));
         }
 
         [HttpPost]
@@ -41,18 +43,53 @@ namespace PropertyTracker.Presentation.API.Controllers
                 group.Id = Guid.NewGuid();
             }
 
-            await this.service.Create(group);
+            await this.groupService.Create(group);
 
             return CreatedAtRoute("GetGroupById", new { id = group.Id }, null);
         }
+
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Route("{id}")]
+        public async Task<IActionResult> Put(Group group, Guid id)
+        {
+            if (!ModelState.IsValid || !id.Equals(group.Id))
+            {
+                return BadRequest();
+            }
+
+            await this.groupService.Update(group);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var site = await this.groupService.Get(id);
+
+            if (site == null)
+            {
+                return NotFound();
+            }
+
+            await this.groupService.Delete(id);
+
+            return Ok();
+        }
+
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Group))]
         [ProducesResponseType(404)]
         [Route("{id}", Name = "GetGroupById")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get([Required] Guid id)
         {
-            var site = await this.service.Get(id);
+            var site = await this.groupService.Get(id);
 
             if (site == null)
             {

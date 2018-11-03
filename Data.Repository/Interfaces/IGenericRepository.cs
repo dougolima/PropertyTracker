@@ -12,5 +12,9 @@ namespace PropertyTracker.Data.Repository.Interfaces
         Task<T> Get(Guid id);
 
         Task Create(T item);
+
+        Task Delete(Guid id);
+
+        Task Update(T item);
     }
 }

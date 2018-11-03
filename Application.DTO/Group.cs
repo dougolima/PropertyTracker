@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PropertyTracker.Application.DTO
@@ -15,8 +14,6 @@ namespace PropertyTracker.Application.DTO
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        public List<Search> Searchs { get; set; }
 
         [Required]
         public bool Active { get; set; }

@@ -10,8 +10,7 @@
                 Name = model.Name,
                 Active = model.Active,
                 Description = model.Description,
-                UserId = model.UserId,
-                Searchs = model.Searchs?.ConvertAll(g => g.ConvertToDTO())
+                UserId = model.UserId
             };
         }
 
