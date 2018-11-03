@@ -16,7 +16,8 @@
             return new Domain.Model.Site()
             {
                 Id = dto.Id,
-                Name = dto.Name
+                Name = dto.Name,
+                Active = true
             };
         }
     }

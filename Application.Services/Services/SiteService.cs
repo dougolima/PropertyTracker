@@ -19,7 +19,7 @@ namespace PropertyTracker.Application.Services.Services
 
         public async Task<List<Site>> GetAll()
         {
-            var sites = await this.repository.GetAll();
+            var sites = await this.repository.GetAll(true);
 
             return sites.ConvertAll(s => s.ConvertToDTO());
         }
@@ -29,6 +29,11 @@ namespace PropertyTracker.Application.Services.Services
             var site = await this.repository.Get(id);
 
             return site?.ConvertToDTO();
+        }
+
+        public Task Create(Site site)
+        {
+            return this.repository.Create(site.ConvertToModel());
         }
     }
 }

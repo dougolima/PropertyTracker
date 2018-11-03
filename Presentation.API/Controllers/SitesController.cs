@@ -18,7 +18,6 @@ namespace PropertyTracker.Presentation.API.Controllers
             this.service = service;
         }
 
-        // GET api/values
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Site>))]
         public async Task<IActionResult> GetAll()
@@ -26,11 +25,10 @@ namespace PropertyTracker.Presentation.API.Controllers
             return Ok(await this.service.GetAll());
         }
 
-        // GET api/values
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Site))]
         [ProducesResponseType(404)]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetSiteById")]
         public async Task<IActionResult> Get(Guid id)
         {
             var site = await this.service.Get(id);
@@ -41,6 +39,26 @@ namespace PropertyTracker.Presentation.API.Controllers
             }
 
             return Ok(site);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Post(Site site)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (site.Id.Equals(Guid.Empty))
+            {
+                site.Id = Guid.NewGuid();
+            }
+
+            await this.service.Create(site);
+
+            return CreatedAtRoute("GetSiteById", new { id = site.Id }, null);
         }
     }
 }

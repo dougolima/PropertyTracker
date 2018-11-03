@@ -3,11 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PropertyTracker.Application.DTO
 {
-    public class Site
+    public class Search
     {
         public Guid Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Url { get; set; }
+
+        [Required]
+        public Guid SiteId { get; set; }
     }
 }

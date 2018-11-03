@@ -31,7 +31,9 @@ namespace PropertyTracker.Presentation.API
             });
 
             services.AddTransient<ISiteService, SiteService>();
+            services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<ISiteRepository, SiteRepository>();
+            services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddSingleton<IMongoDatabase>(m =>
             {
                 var client = new MongoClient();

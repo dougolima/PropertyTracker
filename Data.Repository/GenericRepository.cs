@@ -21,5 +21,10 @@ namespace PropertyTracker.Data.Repository
         {
             return this.GetByIdAsync<T>(id);
         }
+
+        public Task Create(T item)
+        {
+            return this.AddOneAsync<T>(item);
+        }
     }
 }

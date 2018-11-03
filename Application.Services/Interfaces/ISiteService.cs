@@ -10,5 +10,7 @@ namespace PropertyTracker.Application.Services.Interfaces
         Task<List<Site>> GetAll();
 
         Task<Site> Get(Guid id);
+
+        Task Create(Site site);
     }
 }
