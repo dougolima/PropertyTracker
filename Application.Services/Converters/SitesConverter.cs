@@ -11,7 +11,7 @@
             };
         }
 
-        public static Domain.Model.Site ConvertToDTO(this DTO.Site dto)
+        public static Domain.Model.Site ConvertToModel(this DTO.Site dto)
         {
             return new Domain.Model.Site()
             {

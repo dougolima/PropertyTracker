@@ -2,6 +2,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
+using PropertyTracker.Application.Services.Interfaces;
+using PropertyTracker.Application.Services.Services;
+using PropertyTracker.Data.Repository;
+using PropertyTracker.Data.Repository.Interfaces;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace PropertyTracker.Presentation.API
@@ -23,6 +28,14 @@ namespace PropertyTracker.Presentation.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Property Crawler API", Version = "v1" });
+            });
+
+            services.AddTransient<ISiteService, SiteService>();
+            services.AddTransient<ISiteRepository, SiteRepository>();
+            services.AddSingleton<IMongoDatabase>(m =>
+            {
+                var client = new MongoClient();
+                return client.GetDatabase("crawler");
             });
         }
 

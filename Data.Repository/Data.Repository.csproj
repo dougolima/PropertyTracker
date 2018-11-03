@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>PropertyTracker.Domain.Model</AssemblyName>
-    <RootNamespace>PropertyTracker.Domain.Model</RootNamespace>
+    <AssemblyName>PropertyTracker.Data.Repository</AssemblyName>
+    <RootNamespace>PropertyTracker.Data.Repository</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MongoDbGenericRepository" Version="1.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Model\Domain.Model.csproj" />
   </ItemGroup>
 
 </Project>
