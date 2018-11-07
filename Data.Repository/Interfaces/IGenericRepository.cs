@@ -9,6 +9,8 @@ namespace PropertyTracker.Data.Repository.Interfaces
     {
         Task<List<T>> GetAll();
 
+        Task<bool> Any(Guid id);
+
         Task<T> Get(Guid id);
 
         Task Create(T item);

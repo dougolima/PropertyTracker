@@ -3,6 +3,7 @@ using PropertyTracker.Application.DTO;
 using PropertyTracker.Application.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace PropertyTracker.Presentation.API.Controllers
@@ -29,7 +30,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [ProducesResponseType(200, Type = typeof(Site))]
         [ProducesResponseType(404)]
         [Route("{id}", Name = "GetSiteById")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get([FromRoute][Required] Guid id)
         {
             var site = await this.service.Get(id);
 
@@ -44,7 +45,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Post(Site site)
+        public async Task<IActionResult> Post([FromBody][Required] Site site)
         {
             if (!ModelState.IsValid)
             {

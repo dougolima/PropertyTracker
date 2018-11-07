@@ -17,6 +17,11 @@ namespace PropertyTracker.Data.Repository
             return this.GetCollection<T>().AsQueryable().ToListAsync();
         }
 
+        public Task<bool> Any(Guid id)
+        {
+            return this.AnyAsync<T>(x => x.Id.Equals(id));
+        }
+
         public Task<T> Get(Guid id)
         {
             return this.GetByIdAsync<T>(id);

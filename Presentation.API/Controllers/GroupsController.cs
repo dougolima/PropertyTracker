@@ -13,17 +13,15 @@ namespace PropertyTracker.Presentation.API.Controllers
     public class GroupsController : ControllerBase
     {
         private IGroupService groupService { get; }
-        private ISiteService siteService { get; }
 
-        public GroupsController(IGroupService groupService, ISiteService siteService)
+        public GroupsController(IGroupService groupService)
         {
             this.groupService = groupService;
-            this.siteService = siteService;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Group>))]
-        public async Task<IActionResult> GetAll([Required] Guid userId)
+        public async Task<IActionResult> GetAll([FromQuery][Required] Guid userId)
         {
             return Ok(await this.groupService.GetAll(userId));
         }
@@ -31,7 +29,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Post(Group group)
+        public async Task<IActionResult> Post([FromBody][Required] Group group)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +50,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("{id}")]
-        public async Task<IActionResult> Put(Group group, Guid id)
+        public async Task<IActionResult> Put([FromBody][Required] Group group, [FromRoute][Required] Guid id)
         {
             if (!ModelState.IsValid || !id.Equals(group.Id))
             {
@@ -68,7 +66,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromRoute][Required] Guid id)
         {
             var site = await this.groupService.Get(id);
 
@@ -87,7 +85,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [ProducesResponseType(200, Type = typeof(Group))]
         [ProducesResponseType(404)]
         [Route("{id}", Name = "GetGroupById")]
-        public async Task<IActionResult> Get([Required] Guid id)
+        public async Task<IActionResult> Get([FromRoute][Required] Guid id)
         {
             var site = await this.groupService.Get(id);
 
