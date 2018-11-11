@@ -1,9 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>PropertyTracker.Application.DTO</AssemblyName>
     <RootNamespace>PropertyTracker.Application.DTO</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.1.0\ref\netcoreapp2.1\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>
