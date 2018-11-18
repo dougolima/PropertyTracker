@@ -17,23 +17,23 @@ namespace PropertyTracker.Application.Services.Services
             this.repository = repository;
         }
 
-        public async Task<List<Site>> GetAll()
+        public async Task<List<Site>> GetAllAsync()
         {
-            var sites = await this.repository.GetAll(true);
+            var sites = await this.repository.GetAllAsync(true);
 
             return sites.ConvertAll(s => s.ConvertToDTO());
         }
 
-        public async Task<Site> Get(Guid id)
+        public async Task<Site> GetAsync(Guid id)
         {
-            var site = await this.repository.Get(id);
+            var site = await this.repository.GetAsync(id);
 
             return site?.ConvertToDTO();
         }
 
-        public Task Create(Site site)
+        public Task CreateAsync(Site site)
         {
-            return this.repository.Create(site.ConvertToModel());
+            return this.repository.CreateAsync(site.ConvertToModel());
         }
     }
 }

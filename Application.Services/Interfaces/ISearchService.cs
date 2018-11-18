@@ -9,12 +9,12 @@ namespace PropertyTracker.Application.Services.Interfaces
     {
         Task<List<Search>> GetAll(Guid groupId);
 
-        Task<bool> IsValid(Guid groupId, Guid siteId);
+        Task<bool> IsValidAsync(Guid groupId, Guid siteId);
 
-        Task<Search> Get(Guid groupId, Guid searchId);
+        Task<Search> GetAsync(Guid groupId, Guid searchId);
 
-        Task Create(Guid groupId, Search site);
+        Task CreateAsync(Guid groupId, Search site);
 
-        Task Delete(Guid groupId, Guid searchId);
+        Task DeleteAsync(Guid groupId, Guid searchId);
     }
 }

@@ -12,34 +12,42 @@ namespace PropertyTracker.Data.Repository
     {
         public GenericRepository(IMongoDatabase mongoDatabase) : base(mongoDatabase) { }
 
-        public Task<List<T>> GetAll()
+        public Task<List<T>> GetAllAsync()
         {
             return this.GetCollection<T>().AsQueryable().ToListAsync();
         }
 
-        public Task<bool> Any(Guid id)
+        public Task<bool> AnyAsync(Guid id)
         {
             return this.AnyAsync<T>(x => x.Id.Equals(id));
         }
 
-        public Task<T> Get(Guid id)
+        public Task<T> GetAsync(Guid id)
         {
             return this.GetByIdAsync<T>(id);
         }
 
-        public Task Create(T item)
+        public Task CreateAsync(T item)
         {
             return this.AddOneAsync<T>(item);
         }
 
-        public Task Delete(Guid id)
+        public Task DeleteAsync(Guid id)
         {
             return this.DeleteOneAsync<T>(x => x.Id.Equals(id));
         }
 
-        public Task Update(T item)
+        public Task UpdateAsync(T item)
         {
             return this.UpdateOneAsync<T>(item);
+        }
+
+        public Task<ReplaceOneResult> UpsertAsync(T item)
+        {
+            return this.GetCollection<T>().ReplaceOneAsync(
+                doc => doc.Id.Equals(item.Id),
+                item,
+                new UpdateOptions { IsUpsert = true });
         }
     }
 }

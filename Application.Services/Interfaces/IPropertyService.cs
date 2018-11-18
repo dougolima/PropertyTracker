@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace PropertyTracker.Application.Services.Interfaces
 {
-    public interface ISiteService
+    public interface IPropertyService
     {
-        Task<List<Site>> GetAllAsync();
+        Task<List<Property>> GetAllAsync(Guid searchId);
 
-        Task<Site> GetAsync(Guid id);
-
-        Task CreateAsync(Site site);
+        Task UpsertAsync(Property property);
     }
 }

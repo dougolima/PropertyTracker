@@ -34,14 +34,14 @@ namespace PropertyTracker.Presentation.API.Controllers
             [FromRoute][Required] Guid groupId,
             [FromRoute][Required] Guid searchId)
         {
-            var site = await this.service.Get(groupId, searchId);
+            var site = await this.service.GetAsync(groupId, searchId);
 
             if (site == null)
             {
                 return NotFound();
             }
 
-            await this.service.Delete(groupId, searchId);
+            await this.service.DeleteAsync(groupId, searchId);
 
             return Ok();
         }
@@ -54,7 +54,7 @@ namespace PropertyTracker.Presentation.API.Controllers
             [FromRoute][Required] Guid groupId,
             [FromRoute][Required] Guid searchId)
         {
-            var site = await this.service.Get(groupId, searchId);
+            var site = await this.service.GetAsync(groupId, searchId);
 
             if (site == null)
             {
@@ -71,7 +71,7 @@ namespace PropertyTracker.Presentation.API.Controllers
             [FromQuery][Required] Guid groupId,
             [FromBody][Required] Search search)
         {
-            if (!ModelState.IsValid && (await this.service.IsValid(groupId, search.SiteId)))
+            if (!ModelState.IsValid && (await this.service.IsValidAsync(groupId, search.SiteId)))
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace PropertyTracker.Presentation.API.Controllers
                 search.Id = Guid.NewGuid();
             }
 
-            await this.service.Create(groupId, search);
+            await this.service.CreateAsync(groupId, search);
 
             return CreatedAtRoute("GetSearchById", new { groupId, searchId = search.Id }, null);
         }

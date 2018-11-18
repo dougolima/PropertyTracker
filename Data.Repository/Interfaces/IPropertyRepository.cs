@@ -1,11 +1,12 @@
 ﻿using PropertyTracker.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PropertyTracker.Data.Repository.Interfaces
 {
-    public interface ISiteRepository : IGenericRepository<Site>
+    public interface IPropertyRepository : IGenericRepository<Property>
     {
-        Task<List<Site>> GetAllAsync(bool? active);
+        Task<List<Property>> GetAllAsync(Guid searchId);
     }
 }

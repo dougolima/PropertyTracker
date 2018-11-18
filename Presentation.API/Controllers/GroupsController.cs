@@ -23,7 +23,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [ProducesResponseType(200, Type = typeof(List<Group>))]
         public async Task<IActionResult> GetAll([FromQuery][Required] Guid userId)
         {
-            return Ok(await this.groupService.GetAll(userId));
+            return Ok(await this.groupService.GetAllAsync(userId));
         }
 
         [HttpPost]
@@ -41,7 +41,7 @@ namespace PropertyTracker.Presentation.API.Controllers
                 group.Id = Guid.NewGuid();
             }
 
-            await this.groupService.Create(group);
+            await this.groupService.CreateAsync(group);
 
             return CreatedAtRoute("GetGroupById", new { id = group.Id }, null);
         }
@@ -57,7 +57,7 @@ namespace PropertyTracker.Presentation.API.Controllers
                 return BadRequest();
             }
 
-            await this.groupService.Update(group);
+            await this.groupService.UpdateAsync(group);
 
             return Ok();
         }
@@ -68,14 +68,14 @@ namespace PropertyTracker.Presentation.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute][Required] Guid id)
         {
-            var site = await this.groupService.Get(id);
+            var site = await this.groupService.GetAsync(id);
 
             if (site == null)
             {
                 return NotFound();
             }
 
-            await this.groupService.Delete(id);
+            await this.groupService.DeleteAsync(id);
 
             return Ok();
         }
@@ -87,7 +87,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [Route("{id}", Name = "GetGroupById")]
         public async Task<IActionResult> Get([FromRoute][Required] Guid id)
         {
-            var site = await this.groupService.Get(id);
+            var site = await this.groupService.GetAsync(id);
 
             if (site == null)
             {

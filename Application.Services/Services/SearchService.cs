@@ -24,34 +24,34 @@ namespace PropertyTracker.Application.Services.Services
             this.siteRepository = siteRepository;
         }
 
-        public async Task<bool> IsValid(Guid groupId, Guid siteId)
+        public async Task<bool> IsValidAsync(Guid groupId, Guid siteId)
         {
-            var groupExists = await this.groupRepository.Any(groupId);
-            var siteExists = await this.siteRepository.Any(groupId);
+            var groupExists = await this.groupRepository.AnyAsync(groupId);
+            var siteExists = await this.siteRepository.AnyAsync(groupId);
 
             return (groupExists && siteExists);
         }
 
-        public Task Create(Guid groupId, Search search)
+        public Task CreateAsync(Guid groupId, Search search)
         {
-            return this.searchRepository.Create(groupId, search.ConvertToModel());
+            return this.searchRepository.CreateAsync(groupId, search.ConvertToModel());
         }
 
-        public Task Delete(Guid groupId, Guid searchId)
+        public Task DeleteAsync(Guid groupId, Guid searchId)
         {
-            return this.searchRepository.Delete(groupId, searchId);
+            return this.searchRepository.DeleteAsync(groupId, searchId);
         }
 
-        public async Task<Search> Get(Guid groupId, Guid searchId)
+        public async Task<Search> GetAsync(Guid groupId, Guid searchId)
         {
-            var search = await this.searchRepository.Get(groupId, searchId);
+            var search = await this.searchRepository.GetAsync(groupId, searchId);
 
             return search?.ConvertToDTO();
         }
 
         public async Task<List<Search>> GetAll(Guid groupId)
         {
-            var searchs = await this.searchRepository.GetAll(groupId);
+            var searchs = await this.searchRepository.GetAllAsync(groupId);
 
             return searchs?.ConvertAll(g => g.ConvertToDTO());
         }

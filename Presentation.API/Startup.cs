@@ -33,10 +33,12 @@ namespace PropertyTracker.Presentation.API
             services.AddTransient<ISiteService, SiteService>();
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<ISearchService, SearchService>();
+
             services.AddTransient<ISiteRepository, SiteRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<ISearchRepository, SearchRepository>();
-            services.AddSingleton<IMongoDatabase>(m =>
+
+            services.AddSingleton(m =>
             {
                 var client = new MongoClient();
                 return client.GetDatabase("crawler");
@@ -56,7 +58,6 @@ namespace PropertyTracker.Presentation.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Property Crawler API");
-                //c.RoutePrefix = string.Empty;
             });
 
             app.UseMvc();

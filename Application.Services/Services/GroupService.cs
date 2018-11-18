@@ -17,33 +17,33 @@ namespace PropertyTracker.Application.Services.Services
             this.repository = repository;
         }
 
-        public Task Create(Group group)
+        public Task CreateAsync(Group group)
         {
-            return this.repository.Create(group.ConvertToModel());
+            return this.repository.CreateAsync(group.ConvertToModel());
         }
 
-        public Task Delete(Guid id)
+        public Task DeleteAsync(Guid id)
         {
-            return this.repository.Delete(id);
+            return this.repository.DeleteAsync(id);
         }
 
-        public async Task<Group> Get(Guid id)
+        public async Task<Group> GetAsync(Guid id)
         {
-            var group = await this.repository.Get(id);
+            var group = await this.repository.GetAsync(id);
 
             return group?.ConvertToDTO();
         }
 
-        public async Task<List<Group>> GetAll(Guid userId)
+        public async Task<List<Group>> GetAllAsync(Guid? userId = null)
         {
-            var groups = await this.repository.GetAll(userId);
+            var groups = await this.repository.GetAllAsync(userId);
 
             return groups.ConvertAll(g => g.ConvertToDTO());
         }
 
-        public Task Update(Group group)
+        public Task UpdateAsync(Group group)
         {
-            return this.repository.Update(group.ConvertToModel());
+            return this.repository.UpdateAsync(group.ConvertToModel());
         }
     }
 }

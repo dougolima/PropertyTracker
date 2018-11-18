@@ -7,12 +7,12 @@ namespace PropertyTracker.Data.Repository.Interfaces
 {
     public interface ISearchRepository : IGenericRepository<Search>
     {
-        Task<List<Search>> GetAll(Guid groupId);
+        Task<List<Search>> GetAllAsync(Guid groupId);
 
-        Task<Search> Get(Guid groupId, Guid searchId);
+        Task<Search> GetAsync(Guid groupId, Guid searchId);
 
-        Task Create(Guid groupId, Search site);
+        Task CreateAsync(Guid groupId, Search site);
 
-        Task Delete(Guid groupId, Guid searchId);
+        Task DeleteAsync(Guid groupId, Guid searchId);
     }
 }

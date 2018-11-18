@@ -10,7 +10,7 @@ namespace PropertyTracker.Data.Repository
     {
         public SiteRepository(IMongoDatabase mongoDatabase) : base(mongoDatabase) { }
 
-        public Task<List<Site>> GetAll(bool? active)
+        public Task<List<Site>> GetAllAsync(bool? active)
         {
             return this.GetAllAsync<Site>(s => !active.HasValue || s.Active == active.Value);
         }

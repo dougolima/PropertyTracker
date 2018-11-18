@@ -11,9 +11,9 @@ namespace PropertyTracker.Data.Repository
     {
         public GroupRepository(IMongoDatabase mongoDatabase) : base(mongoDatabase) { }
 
-        public Task<List<Group>> GetAll(Guid userId)
+        public Task<List<Group>> GetAllAsync(Guid? userId)
         {
-            return this.GetAllAsync<Group>(g => g.UserId.Equals(userId));
+            return userId.HasValue ? this.GetAllAsync<Group>(g => g.UserId.Equals(userId)) : this.GetAllAsync();
         }
     }
 }

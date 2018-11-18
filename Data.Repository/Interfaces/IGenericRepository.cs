@@ -1,4 +1,5 @@
-﻿using MongoDbGenericRepository.Models;
+﻿using MongoDB.Driver;
+using MongoDbGenericRepository.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,16 +8,18 @@ namespace PropertyTracker.Data.Repository.Interfaces
 {
     public interface IGenericRepository<T> where T : IDocument
     {
-        Task<List<T>> GetAll();
+        Task<List<T>> GetAllAsync();
 
-        Task<bool> Any(Guid id);
+        Task<bool> AnyAsync(Guid id);
 
-        Task<T> Get(Guid id);
+        Task<T> GetAsync(Guid id);
 
-        Task Create(T item);
+        Task CreateAsync(T item);
 
-        Task Delete(Guid id);
+        Task DeleteAsync(Guid id);
 
-        Task Update(T item);
+        Task UpdateAsync(T item);
+
+        Task<ReplaceOneResult> UpsertAsync(T item);
     }
 }

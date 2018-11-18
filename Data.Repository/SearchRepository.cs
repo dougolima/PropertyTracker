@@ -11,7 +11,7 @@ namespace PropertyTracker.Data.Repository
     {
         public SearchRepository(IMongoDatabase mongoDatabase) : base(mongoDatabase) { }
 
-        public async Task Create(Guid groupId, Search search)
+        public async Task CreateAsync(Guid groupId, Search search)
         {
             var group = await this.GetByIdAsync<Group>(groupId);
 
@@ -22,7 +22,7 @@ namespace PropertyTracker.Data.Repository
             await this.UpdateOneAsync(group);
         }
 
-        public async Task Delete(Guid groupId, Guid searchId)
+        public async Task DeleteAsync(Guid groupId, Guid searchId)
         {
             var group = await this.GetByIdAsync<Group>(groupId);
 
@@ -31,14 +31,14 @@ namespace PropertyTracker.Data.Repository
             await this.UpdateOneAsync(group);
         }
 
-        public async Task<Search> Get(Guid groupId, Guid searchId)
+        public async Task<Search> GetAsync(Guid groupId, Guid searchId)
         {
             var group = await this.GetByIdAsync<Group>(groupId);
 
             return group?.Searchs?.Find(s => s.Id.Equals(searchId));
         }
 
-        public async Task<List<Search>> GetAll(Guid groupId)
+        public async Task<List<Search>> GetAllAsync(Guid groupId)
         {
             var group = await this.GetByIdAsync<Group>(groupId);
 

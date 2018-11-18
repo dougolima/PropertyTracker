@@ -23,7 +23,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [ProducesResponseType(200, Type = typeof(List<Site>))]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await this.service.GetAll());
+            return Ok(await this.service.GetAllAsync());
         }
 
         [HttpGet]
@@ -32,7 +32,7 @@ namespace PropertyTracker.Presentation.API.Controllers
         [Route("{id}", Name = "GetSiteById")]
         public async Task<IActionResult> Get([FromRoute][Required] Guid id)
         {
-            var site = await this.service.Get(id);
+            var site = await this.service.GetAsync(id);
 
             if (site == null)
             {
@@ -57,7 +57,7 @@ namespace PropertyTracker.Presentation.API.Controllers
                 site.Id = Guid.NewGuid();
             }
 
-            await this.service.Create(site);
+            await this.service.CreateAsync(site);
 
             return CreatedAtRoute("GetSiteById", new { id = site.Id }, null);
         }

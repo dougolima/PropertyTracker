@@ -7,14 +7,14 @@ namespace PropertyTracker.Application.Services.Interfaces
 {
     public interface IGroupService
     {
-        Task<List<Group>> GetAll(Guid userId);
+        Task<List<Group>> GetAllAsync(Guid? userId = null);
 
-        Task<Group> Get(Guid id);
+        Task<Group> GetAsync(Guid id);
 
-        Task Create(Group group);
+        Task CreateAsync(Group group);
 
-        Task Update(Group group);
+        Task UpdateAsync(Group group);
 
-        Task Delete(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }
